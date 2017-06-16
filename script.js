@@ -272,7 +272,12 @@ function virtualKeyboardChromeExtension_click(key, skip) {
 				keyboardEvent = document.createEvent("Events");
 				keyboardEvent.initEvent("keyup", true, true);
 				keyboardEvent.keyCode = keyboardEvent.which = 8; // Backspace
-				virtualKeyboardChromeExtensionClickedElem.dispatchEvent(keyboardEvent);
+                  virtualKeyboardChromeExtensionClickedElem.dispatchEvent(keyboardEvent);
+
+                  keyboardEvent = document.createEvent("Event");
+                  keyboardEvent.initEvent("input", true, true);
+		  virtualKeyboardChromeExtensionClickedElem.dispatchEvent(keyboardEvent);
+
 				break;
 			default:
 				if (virtualKeyboardChromeExtensionClickedElem != undefined) {
@@ -351,6 +356,10 @@ function virtualKeyboardChromeExtension_click(key, skip) {
 											0, // keyCodeArg : unsigned long the virtual key code, else 0
 											key.charCodeAt(0) // charCodeArgs : unsigned long the Unicode character associated with the depressed key, else 0
 						);
+					        virtualKeyboardChromeExtensionClickedElem.dispatchEvent(keyboardEvent);
+
+						keyboardEvent = document.createEvent("Event");
+                                                keyboardEvent.initEvent("input", true, true);
 						virtualKeyboardChromeExtensionClickedElem.dispatchEvent(keyboardEvent);
 					}
 				}
